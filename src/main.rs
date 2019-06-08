@@ -1,3 +1,5 @@
+#![feature(test)]
+
 use std::io::Write;
 use std::net::{TcpStream, UdpSocket};
 use std::time::{SystemTime, UNIX_EPOCH};

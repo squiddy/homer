@@ -43,6 +43,8 @@ pub fn parse_package(buf: &[u8]) -> Vec<Message> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    extern crate test;
+    use test::{black_box, Bencher};
 
     #[test]
     fn parses_single_metric_packages() {
@@ -91,5 +93,13 @@ mod tests {
                 kind: MessageKind::Counter
             }]
         );
+    }
+
+    #[bench]
+    pub fn bench_parsing(b: &mut Bencher) {
+        let input = "this.is.a.counter:1|c";
+        b.iter(|| {
+            black_box(parse_package(input.as_bytes()));
+        })
     }
 }

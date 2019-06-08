@@ -29,5 +29,6 @@ shorter and easier to understand for my usecase.
 
 ## Setup
 
-Get the rust compiler in version 1.35.0 and run `cargo run`. Configuration is
-possible by editing the `config.toml` in the working directory.
+Get the nightly rust compiler in version 1.36.0 and run `cargo run`.
+Configuration is possible by editing the `config.toml` in the working
+directory.
