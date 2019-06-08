@@ -1,6 +1,6 @@
 use std::str;
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Copy, Clone)]
 pub enum MessageKind {
     Counter,
 }

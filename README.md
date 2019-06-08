@@ -16,13 +16,15 @@ shorter and easier to understand for my usecase.
 * [ ] statsd
     * [x] receive packets via UDP
     * [x] basic packet parsing (no support for sampling rates)
-    * [ ] sampling
-        * [ ] counter
-        * [ ] gauge
-        * [ ] timer
-        * [ ] sets (maybe later)
+    * [ ] performance (recvmmsg, multi thread)
+* [ ] aggregation
+    * [x] counter
+    * [ ] gauge
+    * [ ] timer
+    * [ ] sets (maybe later)
 * [ ] carbon
     * [x] plain text protocol
+    * [ ] periodic flushing
     * [ ] pickle protocol (maybe later)
 * [ ] logging
 * [ ] proper error handling
