@@ -1,15 +1,9 @@
-use serde::Deserialize;
-use std::fs::File;
-use std::io::{BufReader, Read, Write};
-use std::net::{SocketAddr, TcpStream, UdpSocket};
+use std::io::Write;
+use std::net::{TcpStream, UdpSocket};
 use std::str;
 use std::time::{SystemTime, UNIX_EPOCH};
 
-#[derive(Deserialize)]
-struct Config {
-    statsd_addr: SocketAddr,
-    carbon_addr: SocketAddr,
-}
+mod config;
 
 #[derive(Debug)]
 enum MessageKind {
@@ -51,14 +45,10 @@ fn parse_package(buf: &[u8]) -> Vec<Message> {
 }
 
 fn main() {
-    let file = File::open("config.toml").unwrap();
-    let mut buf_reader = BufReader::new(file);
-    let mut contents = String::new();
-    buf_reader.read_to_string(&mut contents).unwrap();
-    let config: Config = toml::from_str(&contents).unwrap();
+    let cfg = config::Config::load("config.toml").unwrap();
 
-    let mut carbon = TcpStream::connect(config.carbon_addr).unwrap();
-    let socket = UdpSocket::bind(config.statsd_addr).unwrap();
+    let mut carbon = TcpStream::connect(cfg.carbon_addr).unwrap();
+    let socket = UdpSocket::bind(cfg.statsd_addr).unwrap();
 
     loop {
         let mut buf = [0; 8192];
