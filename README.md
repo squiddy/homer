@@ -9,3 +9,25 @@ implementation [brubeck](https://github.com/github/brubeck).
 To write something in Rust. I've been reading statsd related code lately,
 especially a C-implementation, and I'd like to see whether I can make it
 shorter and easier to understand for my usecase.
+
+## What's working
+
+* [x] configuration loading
+* [ ] statsd
+    * [x] receive packets via UDP
+    * [x] basic packet parsing (no support for sampling rates)
+    * [ ] sampling
+        * [ ] counter
+        * [ ] gauge
+        * [ ] timer
+        * [ ] sets (maybe later)
+* [ ] carbon
+    * [x] plain text protocol
+    * [ ] pickle protocol (maybe later)
+* [ ] logging
+* [ ] proper error handling
+
+## Setup
+
+Get the rust compiler in version 1.35.0 and run `cargo run`. Configuration is
+possible by editing the `config.toml` in the working directory.
