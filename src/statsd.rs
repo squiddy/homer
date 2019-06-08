@@ -1,10 +1,11 @@
 use std::str;
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub enum MessageKind {
     Counter,
 }
 
+#[derive(Debug, PartialEq)]
 pub struct Message<'a> {
     pub key: &'a str,
     pub value: f64,
@@ -37,4 +38,58 @@ pub fn parse_package(buf: &[u8]) -> Vec<Message> {
     }
 
     return metrics;
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn parses_single_metric_packages() {
+        let input = "this.is.a.counter:1|c";
+        let result = parse_package(input.as_bytes());
+        assert_eq!(
+            result,
+            vec![Message {
+                key: "this.is.a.counter",
+                value: 1.0,
+                kind: MessageKind::Counter
+            }]
+        );
+    }
+
+    #[test]
+    fn parses_multi_metric_packages() {
+        let input = "this.is.a.counter:1|c\nanother.counter.here:34.12|c\n";
+        let result = parse_package(input.as_bytes());
+        assert_eq!(
+            result,
+            vec![
+                Message {
+                    key: "this.is.a.counter",
+                    value: 1.0,
+                    kind: MessageKind::Counter
+                },
+                Message {
+                    key: "another.counter.here",
+                    value: 34.12,
+                    kind: MessageKind::Counter
+                }
+            ]
+        );
+    }
+
+    #[test]
+    fn ignores_unknown_metric_types() {
+        let input = "this.is.something:1|X\nthis.is.a.counter:34.12|c\n";
+        let result = parse_package(input.as_bytes());
+        assert_eq!(
+            result,
+            vec![Message {
+                key: "this.is.a.counter",
+                value: 34.12,
+                kind: MessageKind::Counter
+            }]
+        );
+    }
 }
