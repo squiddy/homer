@@ -94,6 +94,11 @@ impl Aggregator {
         let start = SystemTime::now();
         let unix = start.duration_since(UNIX_EPOCH).unwrap();
 
+        if self.data.is_empty() {
+            return;
+        }
+
+        println!("Flushing {} metrics...", self.data.len());
         for metric in self.data.values_mut() {
             metric.flush(output, unix.as_secs());
         }

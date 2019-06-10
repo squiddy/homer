@@ -9,6 +9,7 @@ use std::fs::File;
 pub struct Config {
     pub statsd_addr: SocketAddr,
     pub carbon_addr: SocketAddr,
+    pub flush_interval: u64
 }
 
 impl Config {

@@ -24,7 +24,7 @@ shorter and easier to understand for my usecase.
     * [ ] sets (maybe later)
 * [ ] carbon
     * [x] plain text protocol
-    * [ ] periodic flushing
+    * [x] periodic flushing
     * [ ] pickle protocol (maybe later)
 * [ ] logging
 * [ ] proper error handling
