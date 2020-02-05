@@ -1,15 +1,15 @@
 use serde::Deserialize;
 use std::error::Error;
-use std::io::{BufReader, Read};
-use std::net::{SocketAddr};
-use std::str;
 use std::fs::File;
+use std::io::{BufReader, Read};
+use std::net::SocketAddr;
+use std::str;
 
 #[derive(Deserialize)]
 pub struct Config {
     pub statsd_addr: SocketAddr,
     pub carbon_addr: SocketAddr,
-    pub flush_interval: u64
+    pub flush_interval: u64,
 }
 
 impl Config {
