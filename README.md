@@ -1,4 +1,4 @@
-# Homer
+# Homer ![CI](https://github.com/squiddy/homer/workflows/CI/badge.svg?branch=master)
 
 Homer is a [statsd](https://github.com/etsy/statsd)-compatible stats
 aggregator written in Rust. I'm basing this implementation on github's statsd
