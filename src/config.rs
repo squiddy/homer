@@ -13,7 +13,7 @@ pub struct Config {
 }
 
 impl Config {
-    pub fn load(filename: &str) -> Result<Config, Box<Error>> {
+    pub fn load(filename: &str) -> Result<Config, Box<dyn Error>> {
         let file = File::open(filename)?;
         let mut buf_reader = BufReader::new(file);
         let mut contents = String::new();

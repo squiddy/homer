@@ -82,6 +82,7 @@ impl Aggregator {
         }
     }
 
+    #[allow(dead_code)]
     pub fn dump(&self) {
         for (key, metric) in &self.data {
             println!("Aggregator stats:");
